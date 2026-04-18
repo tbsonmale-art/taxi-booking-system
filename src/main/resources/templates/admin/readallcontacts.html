@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Contacts Data</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-teal-100 via-yellow-50 to-blue-100 min-h-screen font-sans p-8">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-8">
+    <h1 class="text-3xl font-extrabold text-teal-700 drop-shadow-md">
+      📇 Contacts Data
+    </h1>
+    <a href="dashboard" 
+       class="bg-gradient-to-r from-teal-500 to-blue-500 text-white font-semibold px-5 py-2 rounded-lg shadow-md hover:scale-105 hover:opacity-90 transition duration-300">
+      ⬅ Back to Dashboard
+    </a>
+  </div>
+<div th:if="${msg}" 
+     class="mb-6 px-4 py-3 rounded-lg bg-green-100 text-green-800 font-medium shadow-md">
+  ✅ <span th:text="${msg}"></span>
+</div>
+
+  <!-- Table -->
+  <div class="overflow-x-auto bg-white rounded-2xl shadow-xl border border-gray-200">
+    <table class="min-w-full">
+      <thead class="bg-gradient-to-r from-teal-400 to-blue-400 text-white text-sm uppercase tracking-wider">
+        <tr>
+          <th class="py-3 px-4">ID</th>
+          <th class="py-3 px-4">Name</th>
+          <th class="py-3 px-4">Email</th>
+          <th class="py-3 px-4">Phone</th>
+          <th class="py-3 px-4">Message</th>
+          <th class="py-3 px-4 text-center">Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr th:each="contact : ${allContacts}" 
+            class="odd:bg-yellow-50 even:bg-white hover:bg-blue-50 transition duration-200">
+          <td th:text="${contact.id}" class="py-3 px-4 border-b"></td>
+          <td th:text="${contact.name}" class="py-3 px-4 border-b"></td>
+          <td th:text="${contact.email}" class="py-3 px-4 border-b"></td>
+          <td th:text="${contact.phone}" class="py-3 px-4 border-b"></td>
+          <td th:text="${contact.message}" class="py-3 px-4 border-b"></td>
+          <td class="py-3 px-4 border-b text-center">
+            <a th:href="@{/admin/deleteContact/{id}(id=${contact.id})}"
+             class="bg-gradient-to-r from-red-500 to-pink-500 text-white px-4 py-1 rounded-lg shadow hover:scale-105 hover:opacity-90 transition duration-200">
+              🗑 Delete
+           </a>
+</td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>
+

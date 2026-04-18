@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+	<head>
+		<title>Home</title>
+		<meta charset="utf-8">
+		<meta name = "format-detection" content = "telephone=no" />
+		<link rel="icon" href="images/favicon.ico">
+		<link rel="shortcut icon" href="images/favicon.ico" />
+		<link rel="stylesheet" href="booking/css/booking.css">
+		<link rel="stylesheet" href="css/camera.css">
+		<link rel="stylesheet" href="css/owl.carousel.css">
+		<link rel="stylesheet" href="css/style.css">
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery-migrate-1.2.1.js"></script>
+		<script src="js/script.js"></script>
+		<script src="js/superfish.js"></script>
+		<script src="js/jquery.ui.totop.js"></script>
+		<script src="js/jquery.equalheights.js"></script>
+		<script src="js/jquery.mobilemenu.js"></script>
+		<script src="js/jquery.easing.1.3.js"></script>
+		<script src="js/owl.carousel.js"></script>
+		<script src="js/camera.js"></script>
+		<!--[if (gt IE 9)|!(IE)]><!-->
+		<script src="js/jquery.mobile.customized.min.js"></script>
+		<!--<![endif]-->
+		<script src="booking/js/booking.js"></script>
+		<script>
+			$(document).ready(function(){
+				jQuery('#camera_wrap').camera({
+					loader: false,
+					pagination: false ,
+					minHeight: '444',
+					thumbnails: false,
+					height: '28.28125%',
+					caption: true,
+					navigation: true,
+					fx: 'mosaic'
+				});
+				$().UItoTop({ easingType: 'easeOutQuart' });
+			});
+		</script>
+		<!--[if lt IE 8]>
+			<div style=' clear: both; text-align:center; position: relative;'>
+				<a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+					<img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+				</a>
+			</div>
+			<![endif]-->
+		<!--[if lt IE 9]>
+			<script src="js/html5shiv.js"></script>
+			<link rel="stylesheet" media="screen" href="css/ie.css">
+		<![endif]-->
+	</head>
+	<body class="page1" id="top">
+		<div class="main">
+<!--==============================header=================================-->
+
+<div th:insert = "~{fragments/header.html}"></div>
+<!--==============================header=================================-->
+			<div class="slider_wrapper ">
+				<div id="camera_wrap" class="">
+					<div data-src="images/slide.jpg" ></div>
+					<div data-src="images/slide1.jpg" ></div>
+					<div data-src="images/slide2.jpg"></div>
+				</div>
+			</div>
+			<div class="container_12">
+				<div class="grid_4">
+					<div class="banner">
+						<div class="maxheight">
+							<div class="banner_title">
+								<img src="images/icon1.png" alt="">
+								<div class="extra_wrapper">Fast&amp;
+									<div class="color1">Safe</div>
+								</div>
+							</div>
+							Dorem ipsum dolor sit amet, consectetur adipiscinger elit. In mollis erat mattis neque facilisis, sit ameter ultricies erat rutrum. Cras facilisis, nulla vel viver auctor, leo magna sodales felis, quis malesuad
+							<a href="#" class="fa fa-share-square"></a>
+						</div>
+					</div>
+				</div>
+				<div class="grid_4">
+					<div class="banner">
+						<div class="maxheight">
+							<div class="banner_title">
+								<img src="images/icon2.png" alt="">
+								<div class="extra_wrapper">Best
+									<div class="color1">Prices</div>
+								</div>
+							</div>
+							Hem ipsum dolor sit amet, consectetur adipiscinger elit. In mollis erat mattis neque facilisis, sit ameter ultricies erat rutrum. Cras facilisis, nulla vel viver auctor, leo magna sodales felis, quis malesuader
+							<a href="#" class="fa fa-share-square"></a>
+						</div>
+					</div>
+				</div>
+				<div class="grid_4">
+					<div class="banner">
+						<div class="maxheight">
+							<div class="banner_title">
+								<img src="images/icon3.png" alt="">
+								<div class="extra_wrapper">Package
+									<div class="color1">Delivery</div>
+								</div>
+							</div>
+							Kurem ipsum dolor sit amet, consectetur adipiscinger elit. In mollis erat mattis neque facilisis, sit ameter ultricies erat rutrum. Cras facilisis, nulla vel viver auctor, leo magna sodales felis, quis malesuki
+							<a href="#" class="fa fa-share-square"></a>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="c_phone">
+				<div class="container_12">
+					<div class="grid_12">
+						<div class="fa fa-phone"></div>+ 1800 559 6580
+						<span>ORDER NOW!</span>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+<!--==============================Content=================================-->
+			<div class="content"><div class="ic">More Website Templates @ TemplateMonster.com - April 07, 2014!</div>
+				<div class="container_12">
+					<div class="grid_5">
+					
+					
+						<h3>Booking Form</h3>
+						<p th:text="${message}" style="color:red;"></p>
+						<p th:text="${msg}" style="color:green;"></p>
+						<p th:text="${wsg}" style="color:red;"></p>
+						<form id="bookingForm"  th:action="@{bookingform}"  th:object="${bookingFormDTO}" method="post">
+							<div class="fl1">
+								<div class="tmInput">
+									<input name="name" th:value="${bookingFormDTO.name}" placeHolder="Name:" type="text" data-constraints='@NotEmpty @Required @AlphaSpecial'>
+									<span th:if="${#fields.hasErrors('name')}"  th:errors="*{name}" style="color:red;"></span>
+									
+								</div>
+								<div class="tmInput">
+									<input name="from"  th:value="${bookingFormDTO.from}" placeHolder="From:" type="text" data-constraints="@NotEmpty @Required ">
+									<span th:if="${#fields.hasErrors('from')}"  th:errors="*{from}" style="color:red;"></span>
+									
+								</div>
+							</div>
+							<div class="fl1">
+								<div class="tmInput">
+									<input name="email" th:value="${bookingFormDTO.email}" placeHolder="Email:" type="text" data-constraints="@NotEmpty @Required @Email">
+									<span th:if="${#fields.hasErrors('email')}"  th:errors="*{email}" style="color:red;"></span>
+									
+								</div>
+								<div class="tmInput mr0">
+									<input name="to" th:value="${bookingFormDTO.to}" placeHolder="To:" type="text" data-constraints="@NotEmpty @Required">
+									<span th:if="${#fields.hasErrors('to')}"  th:errors="*{to}" style="color:red;"></span>
+									
+								</div>
+							</div>
+							<div class="clear"></div>
+							<strong>Time</strong>
+							<div class="tmInput">
+								<input name="time" th:value="${bookingFormDTO.time}" placeHolder="" type="time" data-constraints="@NotEmpty @Required">
+								<span th:if="${#fields.hasErrors('time')}"  th:errors="*{time}" style="color:red;"></span>
+								
+							</div>
+							<div class="clear"></div>
+							<strong>Date</strong>
+							<label>
+								<input type="date" th:value="${bookingFormDTO.date}" name="date" data-constraints="@NotEmpty @Required @Date">
+								<span th:if="${#fields.hasErrors('date')}"  th:errors="*{date}" style="color:red;"></span>
+								
+							</label>
+							<div class="clear"></div>
+							<div class="tmRadio">
+								<p>Comfort</p>
+								<span th:if="${#fields.hasErrors('comfort')}"  th:errors="*{comfort}" style="color:red;"></span>
+								<input name="comfort"  value="Cheap" th:checked="${bookingFormDTO.comfort == 'cheap'}" type="radio" id="tmRadio0" data-constraints='@RadioGroupChecked(name="Comfort", groups=[RadioGroup])' checked/>
+								<span>Cheap</span>
+								<input name="comfort" value="standard" th:checked="${bookingFormDTO.comfort == 'standard'}" type="radio" id="tmRadio1" data-constraints='@RadioGroupChecked(name="Comfort", groups=[RadioGroup])' />
+								<span>Standard</span>
+								<input name="comfort" value="luxury" th:checked="${bookingFormDTO.comfort == 'luxury'}" type="radio" id="tmRadio2" data-constraints='@RadioGroupChecked(name="Comfort", groups=[RadioGroup])' />
+								<span>Luxury</span>
+								
+								
+							</div>
+							<div class="clear"></div>
+							<div class="fl1 fl2">
+								<em>Adults</em>
+								<span th:if="${#fields.hasErrors('adult')}"  th:errors="*{adult}" style="color:red;"></span>
+								<select name="adult"  class="tmSelect auto" data-class="tmSelect tmSelect2" data-constraints="">
+								
+									<option th:selected="${bookingFormDTO.adult==1}">1</option>
+									<option>1</option>
+									<option th:selected="${bookingFormDTO.adult==2}">2</option>
+									<option th:selected="${bookingFormDTO.adult==3}">3</option>
+									<option th:selected="${bookingFormDTO.adult==4}">4</option>
+								</select>
+								
+								
+								<div class="clear height1"></div>
+							</div>
+							<div class="fl1 fl2">
+								<em>Children</em>
+								
+								<select name="children" class="tmSelect auto" data-class="tmSelect tmSelect2" data-constraints="">
+									<option th:selected="${bookingFormDTO.children==1}">0</option>
+									<option>0</option>
+									<option th:selected="${bookingFormDTO.children==2}">1</option>
+									<option th:selected="${bookingFormDTO.children==3}">2</option>
+									<option th:selected="${bookingFormDTO.children==4}">3</option>
+								</select>
+								
+								
+							</div>
+							<span th:if="${#fields.hasErrors('children')}"  th:errors="*{children}" style="color:red;"></span>
+							<div class="clear"></div>
+							<div class="tmTextarea">
+								<textarea name="message"  th:text="${bookingFormDTO.message}"placeHolder="Message" data-constraints='@NotEmpty @Required @Length(min=20,max=999999)'></textarea>
+								<span th:if="${#fields.hasErrors('message')}"  th:errors="*{message}" style="color:red;"></span>
+								
+							</div>
+							<button class="btn" data-type="submit">Submit</button>
+						</form>
+					</div>
+					<div class="grid_6 prefix_1">
+						<a href="index2.html" class="type"><img src="images/page1_img1.jpg" alt=""><span class="type_caption">Economy</span></a>
+						<a href="index2.html" class="type"><img src="images/page1_img2.jpg" alt=""><span class="type_caption">Standard</span></a>
+						<a href="index2.html" class="type"><img src="images/page1_img3.jpg" alt=""><span class="type_caption">Lux</span></a>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+<!--==============================footer=================================-->
+<div th:insert = "~{fragments/footer.html}"></div>
+<!--==============================footer=================================-->
+		
