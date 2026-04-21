@@ -127,8 +127,8 @@
 						<h3>Booking Form</h3>
 						<p th:text="${message}" style="color:red;"></p>
 						<p th:text="${msg}" style="color:green;"></p>
-						<p th:text="${wsg}" style="color:red;"></p>
-						<form id="bookingForm"  th:action="@{bookingform}"  th:object="${bookingFormDTO}" method="post">
+						<p th:text="${wmsg}" style="color:red;"></p>
+						<form id="bookingForm"  th:action="@{/bookingform}"  th:object="${bookingFormDTO}" method="post">
 							<div class="fl1">
 								<div class="tmInput">
 									<input name="name" th:value="${bookingFormDTO.name}" placeHolder="Name:" type="text" data-constraints='@NotEmpty @Required @AlphaSpecial'>
@@ -216,7 +216,7 @@
 								<span th:if="${#fields.hasErrors('message')}"  th:errors="*{message}" style="color:red;"></span>
 								
 							</div>
-							<button class="btn" data-type="submit">Submit</button>
+								<button type="submit" class="btn">Submit</button>
 						</form>
 					</div>
 					<div class="grid_6 prefix_1">

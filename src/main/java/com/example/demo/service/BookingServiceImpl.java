@@ -32,8 +32,16 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Booking saveBookingForm(BookingFormDTO bookingFormDTO) {
+
         Booking entity = modelMapper.map(bookingFormDTO, Booking.class);
-        emailService.sendBookingSuccessEmail(bookingFormDTO); // ✅ Correct method name
+
+        try {
+            emailService.sendBookingSuccessEmail(bookingFormDTO);
+        } catch (Exception e) {
+            e.printStackTrace(); // VERY IMPORTANT
+            System.out.println("Email failed but continuing booking...");
+        }
+
         return bookingRepo.save(entity);
     }
 
