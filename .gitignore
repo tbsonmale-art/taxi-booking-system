@@ -36,3 +36,13 @@ build/
 # Ignore sensitive config files
 src/main/resources/application.properties
 
+# STS full installation (VERY IMPORTANT)
+spring-tool-suite-4*
+
+# Node (inside STS)
+.node/
+node_modules/
+
+# Private keys (CRITICAL)
+*.pem
+
