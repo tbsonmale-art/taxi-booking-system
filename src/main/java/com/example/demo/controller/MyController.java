@@ -133,21 +133,34 @@ public class MyController {
     @PostMapping("bookingform")
     public String bookingForm(@Valid @ModelAttribute("bookingFormDTO") BookingFormDTO bookingFormDTO,
             BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("bindingResult", bindingResult);
-            return "redirect:/";
-        } else if (bookingFormDTO.getAdult() + bookingFormDTO.getChildren() > 4) {
-            redirectAttributes.addFlashAttribute("message",
-                    "The total number of passengers (adults + children) cannot exceed 4");
-        } else {
-            Booking result = bookingService.saveBookingForm(bookingFormDTO);
-            if (result != null) {
-                redirectAttributes.addFlashAttribute("msg", "Booking successfully");
+
+        try {
+
+            if (bindingResult.hasErrors()) {
+                redirectAttributes.addFlashAttribute("bindingResult", bindingResult);
+                return "redirect:/";
+            } else if (bookingFormDTO.getAdult() + bookingFormDTO.getChildren() > 4) {
+                redirectAttributes.addFlashAttribute("message",
+                        "The total number of passengers (adults + children) cannot exceed 4");
             } else {
-                redirectAttributes.addFlashAttribute("wmsg", "Something went wrong");
+
+                System.out.println("Booking DTO: " + bookingFormDTO); // DEBUG
+
+                System.out.println("Booking DTO: " + bookingFormDTO);
+                Booking result = bookingService.saveBookingForm(bookingFormDTO);
+
+                if (result != null) {
+                    redirectAttributes.addFlashAttribute("msg", "Booking successfully");
+                } else {
+                    redirectAttributes.addFlashAttribute("wmsg", "Something went wrong");
+                }
             }
+
+        } catch (Exception e) {
+            e.printStackTrace(); // VERY IMPORTANT
+            redirectAttributes.addFlashAttribute("wmsg", "Error occurred during booking");
         }
-        System.out.println(bookingFormDTO);
+
         return "redirect:/";
     }
 }
